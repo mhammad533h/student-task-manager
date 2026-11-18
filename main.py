@@ -1,5 +1,6 @@
 """Console interface for the Student Task Manager."""
 from task_manager.manager import TaskManager
+from task_manager.storage import load_tasks, save_tasks
 
 MENU = """
 ===== Student Task Manager =====
@@ -37,6 +38,7 @@ def handle_delete(manager):
 
 def main():
     manager = TaskManager()
+    load_tasks(manager)
     actions = {"1": handle_add, "2": handle_display, "3": handle_complete, "4": handle_delete}
     while True:
         print(MENU)
@@ -49,6 +51,7 @@ def main():
             print("Invalid option, please choose 1-5.")
             continue
         action(manager)
+        save_tasks(manager)
 
 
 if __name__ == "__main__":
