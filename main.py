@@ -28,8 +28,25 @@ def handle_display(manager):
     print(f"{manager.pending_count()} task(s) pending")
 
 
+def read_task_id(prompt):
+    """Ask for a task id and return it as an int, or None if invalid."""
+    raw = input(prompt).strip()
+    if not raw.isdigit():
+        print("Error: please enter a numeric task id.")
+        return None
+    return int(raw)
+
+
 def handle_complete(manager):
-    print("Completing tasks is coming soon.")
+    task_id = read_task_id("Task id to complete: ")
+    if task_id is None:
+        return
+    try:
+        task = manager.complete_task(task_id)
+    except ValueError as error:
+        print(f"Error: {error}")
+        return
+    print(f"Task {task.id} marked as completed.")
 
 
 def handle_delete(manager):
