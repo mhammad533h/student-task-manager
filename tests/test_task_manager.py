@@ -24,7 +24,7 @@ class TestTaskManager(unittest.TestCase):
         task = self.manager.add_task("Read chapter 4")
         self.manager.complete_task(task.id)
         self.assertTrue(self.manager.get_task(task.id).completed)
-        self.assertEqual(self.manager.pending_count(), 1)
+        self.assertEqual(self.manager.pending_count(), 0)
 
     def test_delete_task(self):
         first = self.manager.add_task("Task one")
