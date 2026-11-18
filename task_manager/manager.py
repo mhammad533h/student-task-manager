@@ -38,8 +38,15 @@ class TaskManager:
         return None
 
     def complete_task(self, task_id):
-        """Mark a task as completed (implemented on feature/complete-task)."""
-        raise NotImplementedError("Completing tasks is not implemented yet")
+        """Mark the task with the given id as completed and return it.
+
+        Raises ValueError if no task has that id.
+        """
+        task = self.get_task(task_id)
+        if task is None:
+            raise ValueError(f"No task with id {task_id}")
+        task.completed = True
+        return task
 
     def pending_count(self):
         """Number of tasks that are not completed yet."""
