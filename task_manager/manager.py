@@ -36,5 +36,12 @@ class TaskManager:
         return sum(1 for task in self.tasks if not task.completed)
 
     def delete_task(self, task_id):
-        """Delete a task (implemented on feature/delete-task)."""
-        raise NotImplementedError("Deleting tasks is not implemented yet")
+        """Delete the task with the given id and return it.
+
+        Raises ValueError if no task has that id.
+        """
+        task = self.get_task(task_id)
+        if task is None:
+            raise ValueError(f"No task with id {task_id}")
+        self.tasks.remove(task)
+        return task
